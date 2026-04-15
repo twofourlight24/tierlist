@@ -24,9 +24,9 @@
         .layout-wrapper {
             max-width: 1200px;
             margin: 0 auto;
-            
-            /* TODO 1: 보드와 사이드 패널을 가로로 배치하고, 공간이 좁아지면 자연스럽게 줄바꿈되도록 설정하세요. (간격: 20px) */
-            /* 💡 힌트: display, flex-wrap, gap 속성을 사용하세요. */
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
             
         }
 
@@ -36,10 +36,11 @@
             border-radius: 12px;
             border: 2px solid #333;
             overflow: hidden;
-            
             /* TODO 2: 남은 가로 공간을 꽉 채우도록 설정하고, 내부 행(Row)들이 세로로 쌓이도록 방향을 지정하세요. */
             /* 💡 힌트: flex-grow와 flex-direction 속성이 필요합니다. (우선 display: flex; 를 선언하는 것도 잊지 마세요!) */
-            
+            display: flex;
+            flex-direction: column; 
+            flex-grow: 1;
         }
 
         /* 3. 사이드 패널 (우측 미리보기 및 대기소 영역) */
@@ -58,6 +59,8 @@
             
             /* TODO 3: 좌측 등급 라벨과 우측 아이템 드롭 영역을 가로로 배치하세요. */
             /* 💡 힌트: 요소를 가로로 나열하는 가장 기본적인 Flexbox 속성 1가지만 적용하면 됩니다. */
+            display: flex;
+            justify-content: flex-start;
             
         }
         .tier-row:last-child { border-bottom: none; }
@@ -91,7 +94,9 @@
             
             /* TODO 4: 아이템들을 가로로 나열하되 넘치면 줄바꿈되도록 하고, 라벨을 제외한 남은 공간을 꽉 채우세요. */
             /* 💡 힌트: display, flex-wrap, flex-grow 세 가지 속성을 모두 조합해야 합니다. */
-            
+            display: flex;
+            flex-wrap: wrap;
+            flex-grow: 1;
         }
 
         /* 아이템 대기소 */
@@ -142,17 +147,19 @@
             .tier-row { 
                 /* TODO 5: 모바일 화면에서는 라벨과 드롭 영역이 세로로 배치되도록 방향을 바꾸세요. */
                 /* 💡 힌트: flex-direction 속성을 활용하여 정렬 축을 세로 방향으로 변경하세요. */
+                flex-direction: column;
                 
             }
             .tier-label { width: 100%; height: 50px; font-size: 1.5rem; }
+            .tier-items { min-height: 120px; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>🏆 우리 조 커스텀 티어 리스트</h1>
-        <p>우리 조원들이 직접 선정한 10개 내외의 항목을 평가해 봅시다.</p>
+        <h1>🏆 배달 음식 야식 티어 리스트</h1>
+        <p> 5조 팀원들의 야식 티어</p>
     </header>
 
     <div class="layout-wrapper">
@@ -186,18 +193,77 @@
 
             <h2 style="font-size: 1.2rem; margin-bottom: 10px; color: #333;">📌 아이템 대기열</h2>
             <div class="item-pool" id="pool" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <!-- 조원들이 전달해준 아이템 코드를 여기에 붙여넣습니다. -->
+
+            <div class="item" draggable="true" ondragstart="drag(event)" onmouseover="showPreview(this)" id="item_yunse_1">
+                <img src="./image/삼겹살.jpg" alt="삼겹살">
+                <div class="item-name">삼겹살</div>
+            </div>
+            
+            <div class="item" draggable="true" ondragstart="drag(event)" onmouseover="showPreview(this)" id="item_yunse_2">
+                <img src="./image/햄버거.jpg" alt="햄버거">
+                <div class="item-name">햄버거</div>
+            </div>
+            <div class="item" draggable="true" ondragstart="drag(event)" onmouseover="showPreview(this)" id="item_hyungseok_1">
+                <img src="image/초밥.jpg" alt="초밥">
+                <div class="item-name">초밥</div>
+            </div>
+            
+            <div class="item" draggable="true" ondragstart="drag(event)" onmouseover="showPreview(this)" id="item_hyungseok_2">
+                <img src="image/피자2.jpg" alt="피자">
+                <div class="item-name">피자</div>
+            </div>
+
+            <div class="item" draggable="true" ondragstart="drag(event)" onmouseover="showPreview(this)" id="item_junhyuk_1">
+                <img src="image/족발.jpg" alt="족발">
+                <div class="item-name">족발</div>
+            </div>
+            
+            <div class="item" draggable="true" ondragstart="drag(event)" onmouseover="showPreview(this)" id="item_junhyuk_2">
+                <img src="image/김치볶음밥.jpg" alt="김치볶음밥">
+                <div class="item-name">김치볶음밥</div>
+            </div>
+
+            <div class="item" draggable="true" ondragstart="drag(event)" onmouseover="showPreview(this)" id="item_kyuchan_1">
+                <img src="image/감자탕.jpg" alt="감자탕">
+                <div class="item-name">감자탕</div>
+            </div>
+            
+            <div class="item" draggable="true" ondragstart="drag(event)" onmouseover="showPreview(this)" id="item_kyuchan_2">
+                <img src="image/닭강정.jpg" alt="닭강정">
+                <div class="item-name">닭강정</div>
+            </div>
+            <div class="item" draggable="true" ondragstart="drag(event)" onmouseover="showPreview(this)" id="item_kimijun_1">
+                <img src="image/곱창.jpg" alt="곱창">
+                <div class="item-name">곱창</div>
+            </div>
+            
+            <div class="item" draggable="true" ondragstart="drag(event)" onmouseover="showPreview(this)" id="item_kimijun_2">
+                <img src="image/닭갈비.jpg" alt="닭갈비">
+                <div class="item-name">닭갈비</div>
+            </div>
+
+            <div class="item" draggable="true" ondragstart="drag(event)" onmouseover="showPreview(this)" id="item_ohs_1">
+                <img src="image/물냉면.png" alt="물냉면">
+                <div class="item-name">냉면</div>
+            </div>
+            
+            <div class="item" draggable="true" ondragstart="drag(event)" onmouseover="showPreview(this)" id="item_ohs_2">
+                <img src="image/떡볶이.png" alt="떡볶이">
+                <div class="item-name">떡볶이</div>
+            </div>
+            <!-- 팀원 아이템 끝 -->
             </div>
         </aside>
     </div>
 
     <script>
         function allowDrop(ev) { ev.preventDefault(); }
-        function drag(ev) { ev.dataTransfer.setData("text", ev.target.id); }
+        function drag(ev) { ev.dataTransfer.setData("text/plain", ev.currentTarget.id); }
         function drop(ev) {
             ev.preventDefault();
-            var data = ev.dataTransfer.getData("text");
+            var data = ev.dataTransfer.getData("text/plain");
             var draggedElement = document.getElementById(data);
+            if (!draggedElement) return;
             if (ev.target.classList.contains('tier-items') || ev.target.classList.contains('item-pool')) {
                 ev.target.appendChild(draggedElement);
             } else if (ev.target.closest('.tier-items')) {
